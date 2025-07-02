@@ -1,10 +1,10 @@
-import type { RequestAnalyzeProps } from "../hooks/useAnalyze";
+import type { AnalysisResult, RequestAnalyzeProps } from "../hooks/useAnalyze";
 
 const API_URL = import.meta.env.VITE_API_URL + '/analyze';
 
 export class AnalyzeService {
 
-    async analyzeImage(req: RequestAnalyzeProps, token: string): Promise<any> {
+    async analyzeImage(req: RequestAnalyzeProps, token: string): Promise<AnalysisResult> {
         const formData = new FormData();
 
         formData.append('file', req.image);
@@ -35,7 +35,10 @@ export class AnalyzeService {
             throw new Error('Error al analizar la imagen: ' + result.detail);
         }
 
-        return result;
+        return {
+            image: result.image,
+            summary: result.summary,
+        };
     }
 
 }
