@@ -81,17 +81,17 @@ export default function AnalysisSection() {
 
                             {/* info del paciente */}
                             <div className="flex flex-col gap-6">
-                                <h3 className="text-lg font-bold">Detalles de Caninos:</h3>
+                                <h3 className="text-lg font-bold">Detalles de Caninos (lados invertidos):</h3>
                                 {result.summary.map((a, i) => (
                                     <li key={i} className="text-lg">
-                                        <strong>{a.side === "izq" ? "Izquierdo" : "Derecho"}:</strong>{" "}
+                                        <strong>{a.side === "izq" ? "Derecho" : "Izquierdo"}:</strong>{" "}
                                         {a.angle.toFixed(1)}°{" "}
-                                        {a.atRisk && <span className="text-red-500">(¡Riesgo!)</span>}
+                                        {(a.angle > 15) && <span className="text-red-500 font-semibold">(¡Riesgo!)</span>}
                                     </li>
                                 ))}
 
                                 {
-                                    result.summary.every(a => !a.atRisk) && (
+                                    result.summary.every(a => !(a.angle > 15)) && (
                                         <p className="text-lg text-black/60">
                                             No se detectaron anomalías en la radiografía.
                                         </p>

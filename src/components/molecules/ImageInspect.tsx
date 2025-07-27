@@ -43,20 +43,22 @@ export default function ImageInspect({
 
                 {/* Detalles debajo */}
                 <div className="flex flex-col gap-4 ">
-                    <h3 className="text-xl font-semibold mb-2">Detalles de Caninos</h3>
+                    <h3 className="text-xl font-semibold mb-2">Detalles de Caninos (lados invertidos)</h3>
 
                     <ul className="list-disc list-inside space-y-1">
                         {summary.map((a, i) => (
                             <li key={i} className="text-lg">
-                                <strong>{a.side === 'izq' ? 'Izquierdo' : 'Derecho'}:</strong>{' '}
+                                <strong>{a.side === 'izq' ? 'Derecho' : 'Izquierdo'}:</strong>{' '}
                                 {a.angle.toFixed(1)}°{' '}
-                                {a.atRisk && <span className="text-red-500">(¡Riesgo!)</span>}
+                                {(a.angle > 15) && <span className="text-red-500 font-semibold">(¡Riesgo!)</span>}
                             </li>
                         ))}
                     </ul>
-                    {summary.every(a => !a.atRisk) &&
+                    {summary.every(a => !(a.angle > 15)) ?
                         <p className="text-lg text-gray-600">
                             No se detectaron anomalías en la radiografía.
+                        </p> : <p className="text-lg text-red-600 font-semibold">
+                            Se detectaron anomalías en la radiografía. Revise detalladamente los ángulos de los caninos y la proyección de los mismos.
                         </p>
                     }
 
