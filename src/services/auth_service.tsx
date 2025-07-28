@@ -2,6 +2,8 @@ import type { User } from "../hooks/useAuth";
 
 const API_URL = import.meta.env.VITE_API_URL + '/auth';
 
+console.log("API_URL:", API_URL);
+
 interface AuthServiceInterface {
     loginFunction(email: string, password: string): Promise<User>;
     logoutFunction(): Promise<void>;
