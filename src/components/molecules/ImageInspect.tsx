@@ -49,7 +49,7 @@ export default function ImageInspect({
                         {summary.map((a, i) => (
                             <li key={i} className="text-lg">
                                 <strong>{a.side === 'izq' ? 'Derecho' : 'Izquierdo'}:</strong>{' '}
-                                {a.angle.toFixed(1)}°{' '}
+                                {a.angle.toFixed(1) === '0.0' ? 'No detectado' : `${a.angle.toFixed(1)}°`}{' '}
                                 {(a.angle > 15) && <span className="text-red-500 font-semibold">(¡Riesgo!)</span>}
                             </li>
                         ))}
